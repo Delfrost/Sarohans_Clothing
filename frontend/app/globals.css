@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* === SAROHANS BRAND COLORS === */
+  --gold-primary: #C9A84C;
+  --gold-light: #E8D5A3;
+  --gold-shimmer: #F5E6B8;
+  --gold-dim: #8B6914;
+
+  --black-deep: #0A0800;
+  --black-surface: #1A1508;
+  --black-card: #120F03;
+
+  --beige-warm: #F5EDD6;
+  --beige-light: #FAF5E9;
+
+  /* === TYPOGRAPHY SCALE === */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'EB Garamond', serif;
+  --font-label: 'Cinzel', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--black-deep);
+  color: var(--gold-light);
+  font-family: var(--font-body);
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-dim) 0%,
+    var(--gold-shimmer) 50%,
+    var(--gold-dim) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
