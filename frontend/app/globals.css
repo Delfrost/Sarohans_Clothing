@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+/* ── CRITICAL: prevent Tailwind base from adding white bg to images ── */
+img {
+  background: transparent !important;
+}
+
 body {
   background-color: var(--black-deep);
   color: var(--gold-light);
