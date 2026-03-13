@@ -201,7 +201,7 @@ function CustomerReviews() {
 
       {/* Embedded Scoped CSS ensuring no conflicts with teammate's repo */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap');
 
         .tanvi-reviews-wrapper {
             --bg-dark: #0b0b0b;
@@ -215,7 +215,7 @@ function CustomerReviews() {
             --text-muted: #a0a0a0;
             --font-heading: 'Cinzel', serif;
             --font-subheading: 'Playfair Display', serif;
-            --font-body: 'Lato', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             
             font-family: var(--font-body);
