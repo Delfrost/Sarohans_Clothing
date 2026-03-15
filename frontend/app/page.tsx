@@ -1,5 +1,6 @@
 import CustomerReviews from "../components/sections/CustomerReviews";
 import Categories from "../components/sections/Categories5";
+import SarohansLegacy from "../components/sections/SarohansLegacy";
 
 export default function Home() {
   return (

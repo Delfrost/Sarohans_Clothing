@@ -1,6 +1,8 @@
 import "./globals.css";
 import NavBar from "../components/ui/NavBar";
+import SarohansLegacy from "../components/sections/SarohansLegacy";
 import SarohansFooter from "../components/sections/Footer";
+
 
 export default function RootLayout({
   children,
@@ -35,7 +37,7 @@ export default function RootLayout({
         >
           {children}
         </div>
-
+          <SarohansLegacy />
         {/* Footer — always at the bottom */}
         <SarohansFooter />
       </body>

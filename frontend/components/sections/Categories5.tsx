@@ -13,7 +13,7 @@ const categories = [
     id: 2,
     name: "Sherwanis",
     subtitle: "Royal Grandeur",
-    image: "https://i.pinimg.com/1200x/90/29/d8/9029d88b83c3bc133ba833f8930f1c8a.jpg",
+    image: "https://i.pinimg.com/736x/c5/ff/82/c5ff829d38dc7fc9fb760ed3da6285fa.jpg",
   },
   {
     id: 3,

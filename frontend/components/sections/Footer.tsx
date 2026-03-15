@@ -36,8 +36,9 @@ const FOOTER_CSS = `
     position: relative;
     overflow: hidden;
     min-height: 520px;
-    background-color: #0A0806;
+    background-color: #050402;
     font-family: 'Cormorant Garamond', Georgia, serif;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
   }
 
   .sf-bg {
@@ -45,7 +46,7 @@ const FOOTER_CSS = `
     inset: 0;
     background-size: cover;
     background-position: center 30%;
-    filter: brightness(0.42) saturate(0.55);
+    filter: brightness(0.2) saturate(0.8);
     transform: scale(1.04);
   }
 
@@ -53,15 +54,16 @@ const FOOTER_CSS = `
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, rgba(10,8,6,0.5) 0%, rgba(10,8,6,0.80) 55%, rgba(10,8,6,0.97) 100%),
-      radial-gradient(ellipse 120% 80% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%);
+      linear-gradient(180deg, rgba(5,4,2,0.7) 0%, rgba(5,4,2,0.92) 55%, rgba(2,1,0,1) 100%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(212,175,55,0.08) 0%, transparent 70%);
   }
 
   .sf-top-border {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #C9A84C 25%, #E8C97A 50%, #C9A84C 75%, transparent);
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5) 25%, #D4AF37 50%, rgba(212,175,55,0.5) 75%, transparent);
+    z-index: 10;
   }
 
   .sf-content {
@@ -96,29 +98,30 @@ const FOOTER_CSS = `
 
   .sf-brand-name {
     font-family: 'Cinzel', serif;
-    font-size: 1.7rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    color: #E8C97A;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    color: #F3E5AB;
     text-transform: uppercase;
     line-height: 1;
+    text-shadow: 0 0 20px rgba(212,175,55,0.2);
   }
 
   .sf-tagline-rule {
-    width: 44px;
+    width: 60px;
     height: 1px;
-    background: linear-gradient(90deg, #C9A84C, transparent);
-    margin-bottom: 14px;
+    background: linear-gradient(90deg, #D4AF37, transparent);
+    margin-bottom: 18px;
   }
 
   .sf-desc {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 0.94rem;
+    font-size: 1.05rem;
     line-height: 1.8;
-    color: rgba(245,230,192,0.72);
-    margin-bottom: 28px;
-    max-width: 255px;
+    color: rgba(245,230,192,0.75);
+    margin-bottom: 32px;
+    max-width: 280px;
   }
 
   .sf-contacts {
@@ -133,30 +136,40 @@ const FOOTER_CSS = `
     display: flex;
     align-items: flex-start;
     gap: 9px;
-    font-size: 0.81rem;
-    letter-spacing: 0.04em;
-    color: rgba(245,230,192,0.58);
-    line-height: 1.55;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: rgba(245,230,192,0.65);
+    line-height: 1.6;
   }
 
-  .sf-ci { color: #C9A84C; flex-shrink: 0; margin-top: 1px; display: flex; }
+  .sf-ci { color: #D4AF37; flex-shrink: 0; margin-top: 1px; display: flex; }
 
   /* Nav cols */
   .sf-col-heading {
     font-family: 'Cinzel', serif;
-    font-size: 0.62rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    letter-spacing: 0.36em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: #C9A84C;
-    margin-bottom: 5px;
+    color: #D4AF37;
+    margin-bottom: 12px;
   }
 
   .sf-col-rule {
-    width: 30px; height: 1px;
-    background: #C9A84C;
-    opacity: 0.55;
-    margin-bottom: 20px;
+    width: 35px; height: 1px;
+    background: #D4AF37;
+    opacity: 0.6;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .sf-col-rule::after {
+    content: '';
+    position: absolute;
+    left: 35px;
+    top: -1px;
+    width: 3px; height: 3px;
+    background: #D4AF37;
+    border-radius: 50%;
   }
 
   .sf-links {
@@ -164,37 +177,104 @@ const FOOTER_CSS = `
     padding: 0; margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
   .sf-link {
     text-decoration: none;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
     color: rgba(245,230,192,0.65);
     position: relative;
     display: inline-block;
-    transition: color 0.32s ease;
+    transition: all 0.3s ease;
+    padding: 2px 0;
   }
 
   .sf-link::after {
     content: '';
     position: absolute;
-    bottom: -2px; left: 0;
+    bottom: 0px; left: 0;
     width: 0; height: 1px;
-    background: #E8C97A;
-    transition: width 0.32s ease;
+    background: #F3E5AB;
+    transition: width 0.3s ease;
   }
 
-  .sf-link:hover { color: #E8C97A; }
+  .sf-link:hover { color: #F3E5AB; transform: translateX(4px); }
   .sf-link:hover::after { width: 100%; }
+
+  /* Newsletter section */
+  .sf-newsletter-wrap {
+    text-align: center;
+    margin: 70px auto 0;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+  }
+  .sf-newsletter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #D4AF37;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .sf-newsletter-desc {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(245,230,192,0.7);
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .sf-newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(212,175,55,0.4);
+    padding-bottom: 8px;
+    transition: border-color 0.3s ease;
+  }
+  .sf-newsletter-form:focus-within {
+    border-bottom-color: #D4AF37;
+  }
+  .sf-newsletter-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #FFF;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    flex: 1;
+    padding: 8px 12px;
+  }
+  .sf-newsletter-input::placeholder {
+    color: rgba(245,230,192,0.3);
+  }
+  .sf-newsletter-btn {
+    background: transparent;
+    border: none;
+    color: #D4AF37;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+  }
+  .sf-newsletter-btn:hover {
+    color: #F3E5AB;
+    text-shadow: 0 0 10px rgba(212,175,55,0.5);
+  }
 
   /* Divider */
   .sf-divider-wrap {
     position: relative;
     z-index: 2;
-    margin: 60px 0 0;
+    margin: 50px 0 0;
     padding: 0 40px;
   }
 
@@ -205,7 +285,7 @@ const FOOTER_CSS = `
 
   .sf-divider-line {
     width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35) 15%, #C9A84C 50%, rgba(201,168,76,0.35) 85%, transparent);
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3) 15%, #D4AF37 50%, rgba(212,175,55,0.3) 85%, transparent);
     position: relative;
   }
 
@@ -213,9 +293,10 @@ const FOOTER_CSS = `
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    width: 7px; height: 7px;
-    background: #C9A84C;
-    border: 1px solid #E8C97A;
+    width: 9px; height: 9px;
+    background: #050402;
+    border: 1px solid #D4AF37;
+    box-shadow: 0 0 10px rgba(212,175,55,0.5);
   }
 
   /* Bottom bar */
@@ -224,7 +305,7 @@ const FOOTER_CSS = `
     z-index: 2;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 22px 40px 36px;
+    padding: 28px 40px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -233,13 +314,13 @@ const FOOTER_CSS = `
 
   .sf-copy {
     font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.13em;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(201,168,76,0.52);
+    color: rgba(212,175,55,0.6);
   }
 
-  .sf-copy span { color: rgba(201,168,76,0.78); }
+  .sf-copy span { color: rgba(212,175,55,0.9); }
 
   .sf-socials {
     display: flex;
@@ -251,10 +332,10 @@ const FOOTER_CSS = `
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px; height: 35px;
-    border: 1px solid rgba(201,168,76,0.28);
+    width: 38px; height: 38px;
+    border: 1px solid rgba(212,175,55,0.3);
     border-radius: 50%;
-    color: rgba(201,168,76,0.62);
+    color: rgba(212,175,55,0.7);
     text-decoration: none;
     transition: all 0.32s ease;
     position: relative;
@@ -264,16 +345,16 @@ const FOOTER_CSS = `
   .sf-social::before {
     content: '';
     position: absolute; inset: 0;
-    background: rgba(201,168,76,0.15);
+    background: rgba(212,175,55,0.15);
     border-radius: 50%;
     transform: scale(0);
     transition: transform 0.32s ease;
   }
 
   .sf-social:hover {
-    color: #E8C97A;
-    border-color: #C9A84C;
-    box-shadow: 0 0 12px rgba(201,168,76,0.18);
+    color: #F3E5AB;
+    border-color: #D4AF37;
+    box-shadow: 0 0 15px rgba(212,175,55,0.3);
   }
 
   .sf-social:hover::before { transform: scale(1); }
@@ -288,6 +369,7 @@ const FOOTER_CSS = `
     .sf-content { padding: 48px 24px 0; }
     .sf-grid { grid-template-columns: 1fr; gap: 34px; }
     .sf-divider-wrap { padding: 0 24px; }
+    .sf-newsletter-wrap { margin-top: 50px; }
     .sf-desc { max-width: 100%; }
     .sf-bottom {
       flex-direction: column;
@@ -341,19 +423,11 @@ const IconFacebook = () => (
 );
 
 const Emblem = () => (
-  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 44, height: 44 }}>
-    <circle cx="24" cy="24" r="22" stroke="#C9A84C" strokeWidth="1"/>
-    <circle cx="24" cy="24" r="18" stroke="#C9A84C" strokeWidth="0.5" strokeDasharray="2 3"/>
-    <path d="M24 8 Q27 16 24 20 Q21 16 24 8Z" fill="#C9A84C" opacity="0.85"/>
-    <path d="M24 40 Q27 32 24 28 Q21 32 24 40Z" fill="#C9A84C" opacity="0.85"/>
-    <path d="M8 24 Q16 27 20 24 Q16 21 8 24Z" fill="#C9A84C" opacity="0.85"/>
-    <path d="M40 24 Q32 27 28 24 Q32 21 40 24Z" fill="#C9A84C" opacity="0.85"/>
-    <path d="M12.7 12.7 Q18.5 18 17.2 21.5 Q13.7 20.2 12.7 12.7Z" fill="#C9A84C" opacity="0.55"/>
-    <path d="M35.3 35.3 Q29.5 30 30.8 26.5 Q34.3 27.8 35.3 35.3Z" fill="#C9A84C" opacity="0.55"/>
-    <path d="M35.3 12.7 Q30 18.5 26.5 17.2 Q27.8 13.7 35.3 12.7Z" fill="#C9A84C" opacity="0.55"/>
-    <path d="M12.7 35.3 Q18 29.5 21.5 30.8 Q20.2 34.3 12.7 35.3Z" fill="#C9A84C" opacity="0.55"/>
-    <circle cx="24" cy="24" r="4" fill="#C9A84C"/>
-    <circle cx="24" cy="24" r="2.5" fill="#0A0806"/>
+  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 50, height: 50 }}>
+    <circle cx="30" cy="30" r="28" stroke="#D4AF37" strokeWidth="1"/>
+    <circle cx="30" cy="30" r="24" stroke="#D4AF37" strokeWidth="0.5" strokeDasharray="2 4"/>
+    <path d="M30 10 L33 22 L45 25 L35 32 L38 44 L30 38 L22 44 L25 32 L15 25 L27 22 Z" fill="#D4AF37" opacity="0.8"/>
+    <circle cx="30" cy="30" r="4" fill="#0A0806" stroke="#F3E5AB" strokeWidth="1.5"/>
   </svg>
 );
 
@@ -423,6 +497,16 @@ export default function SarohansFooter() {
             </div>
           ))}
 
+        </div>
+      </div>
+
+      {/* Newsletter */}
+      <div className="sf-newsletter-wrap">
+        <h4 className="sf-newsletter-title">Join the Royal List</h4>
+        <p className="sf-newsletter-desc">Subscribe to receive updates on new arrivals, exclusive offers, and our heritage tales.</p>
+        <div className="sf-newsletter-form">
+          <input type="email" placeholder="Your Email Address" className="sf-newsletter-input" />
+          <button className="sf-newsletter-btn">Subscribe</button>
         </div>
       </div>
 
