@@ -1,54 +1,143 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+
+// ─── Animated Counter ────────────────────────────────────────────────────────
+function AnimatedCounter({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+
+  useEffect(() => {
+    if (!inView) return;
+    const start = performance.now();
+    const step = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 // ─── Heritage Stats Strip ──────────────────────────────────────────────────────
 export function HeritageStrip() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const stats = [
+    { target: 1842, suffix: "", label: "Year Founded" },
+    { target: 180, suffix: "+", label: "Artisan Families" },
+    { target: 6, suffix: "", label: "Craft Traditions" },
+    { target: 28, suffix: "K+", label: "Royal Clients" },
+  ];
+
   return (
     <div style={{
       position: "relative",
-      padding: "clamp(52px, 7vw, 90px) clamp(20px, 5vw, 80px)",
+      padding: "clamp(64px, 8vw, 110px) clamp(20px, 5vw, 80px)",
       background: "linear-gradient(135deg, #0E0B02 0%, #0A0800 50%, #0E0B02 100%)",
       borderTop: "1px solid rgba(201,168,76,0.12)",
       borderBottom: "1px solid rgba(201,168,76,0.12)",
       textAlign: "center",
       overflow: "hidden",
     }}>
+      {/* Animated gold glow behind */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,168,76,0.055) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)",
       }} />
+
+      {/* Floating particles specific to stats for a better look */}
+      <div className="dust-container" style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", opacity: 0.6 }}>
+        {mounted && Array.from({ length: 15 }).map((_, i) => (
+          <div
+            key={i}
+            className="dust-mote"
+            style={{
+              position: "absolute",
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+              background: "rgba(201,168,76,0.3)",
+              boxShadow: "0 0 8px rgba(201,168,76,0.5)",
+              animation: `float-mote ${Math.random() * 8 + 8}s linear infinite`,
+              animationDelay: `-${Math.random() * 15}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Section label */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        style={{ marginBottom: 48, position: "relative", zIndex: 1 }}
+      >
+        <div style={{
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: "0.45rem",
+          fontWeight: 600,
+          letterSpacing: "0.5em",
+          textTransform: "uppercase",
+          color: "rgba(201,168,76,0.5)",
+          marginBottom: 10,
+        }}>
+          A Legacy in Numbers
+        </div>
+        <div style={{
+          width: 40,
+          height: 1,
+          background: "linear-gradient(90deg, transparent, #C9A84C, transparent)",
+          margin: "0 auto",
+        }} />
+      </motion.div>
+
       <div style={{
         position: "relative", zIndex: 1,
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
         gap: "clamp(28px, 4vw, 56px)", maxWidth: 1000, margin: "0 auto",
       }}>
-        {[
-          { n: "1842", label: "Year Founded" },
-          { n: "180+", label: "Artisan Families" },
-          { n: "6",    label: "Craft Traditions" },
-          { n: "28K+", label: "Royal Clients" },
-        ].map(({ n, label }) => (
-          <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+        {stats.map(({ target, suffix, label }, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}
+          >
             <span style={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+              fontSize: "clamp(2.6rem, 5vw, 4rem)",
               fontWeight: 400, fontStyle: "italic",
               color: "#C9A84C", lineHeight: 1, letterSpacing: "0.02em",
-            }}>{n}</span>
+            }}>
+              <AnimatedCounter target={target} suffix={suffix} duration={2200 + i * 200} />
+            </span>
             <span style={{
               fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.56rem", fontWeight: 600, letterSpacing: "0.38em",
-              textTransform: "uppercase", color: "rgba(232,213,163,0.42)",
+              fontSize: "0.52rem", fontWeight: 600, letterSpacing: "0.38em",
+              textTransform: "uppercase", color: "rgba(232,213,163,0.35)",
             }}>{label}</span>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
   );
 }
+
 
 // ─── Main Landing Page ────────────────────────────────────────────────────────
 export default function LandingPage() {
@@ -319,6 +408,10 @@ export default function LandingPage() {
           opacity: 0.045,
           zIndex: 0,
         }} />
+
+        {/* Dynamic Glowing Luxury Orbs */}
+        <div className="luxury-orb-1" />
+        <div className="luxury-orb-2" />
 
         {/* ── Layout row ── */}
         <div className="lp-hero-layout" style={{

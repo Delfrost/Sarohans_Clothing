@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const categories = [
   {
@@ -311,7 +312,13 @@ export default function RoyalCategoryShowcase() {
       }}>
 
         {/* ── Royal Header ── */}
-        <div style={{ textAlign: "center", marginBottom: "72px" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ textAlign: "center", marginBottom: "72px" }}
+        >
           
           {/* Top Crown Accent */}
           <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
@@ -349,7 +356,7 @@ export default function RoyalCategoryShowcase() {
             </p>
             <div style={{ height: "1px", width: "80px", background: `linear-gradient(to left, transparent, ${gold})` }} />
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Cards Grid ── */}
         <div style={{
@@ -358,8 +365,16 @@ export default function RoyalCategoryShowcase() {
           gap: "40px 32px",
           width: "100%",
         }}>
-          {categories.map((cat) => (
-            <CategoryCard key={cat.id} cat={cat} />
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CategoryCard cat={cat} />
+            </motion.div>
           ))}
         </div>
 

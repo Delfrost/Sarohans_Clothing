@@ -16,6 +16,7 @@ export default function RootLayout({
         />
       </head>
       <body
+        suppressHydrationWarning
         style={{
           display: "flex",
           flexDirection: "column",
