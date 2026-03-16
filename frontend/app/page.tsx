@@ -4,8 +4,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import HeroSection from "../components/sections/LandingPage2";
 import { HeritageStrip } from "../components/sections/LandingPage";
-import Categories from "../components/sections/CategoriesArch";
+import Categories from "../components/sections/Categories5";
 import CustomerReviews from "../components/sections/CustomerReviews";
+import SaroHansShowcase from "../components/sections/Categories6";
 import CraftsmanshipJourney from "../components/sections/CraftsmanshipJourney";
 import GoldParticles from "../components/ui/GoldParticles";
 
@@ -93,6 +94,12 @@ export default function Home() {
 
       {/* 1. Cinematic hero with parallax */}
       <HeroSection />
+
+      {/* ── Transition ── */}
+      <SectionTransition variant="grand" />
+
+      {/* 1.5 Saro & Hans — Collection Showcase */}
+      <SaroHansShowcase />
 
       {/* ── Transition ── */}
       <SectionTransition variant="grand" />
