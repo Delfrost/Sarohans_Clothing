@@ -12,7 +12,7 @@ const STEPS = [
     description:
       "Our master craftsmen travel to the silk farms of Kanchipuram and Varanasi, hand-selecting only the purest threads — each one examined for luminosity, tensile strength, and the way it catches light.",
     image:
-      "https://i.pinimg.com/1200x/c1/9f/61/c19f61b0c0ed1b4e062e783daec08ec0.jpg",
+      "https://i.pinimg.com/1200x/77/26/35/7726355cbb84bd03e85132d354b13563.jpg",
   },
   {
     number: "02",
@@ -21,7 +21,7 @@ const STEPS = [
     description:
       "Patterns inspired by Mughal jali work, Rajputana fort architecture, and sacred temple geometry are hand-drawn on parchment — a tradition passed through six generations of our design atelier.",
     image:
-      "https://i.pinimg.com/1200x/5f/84/f1/5f84f18b320dae36a4f9104033baf5ae.jpg",
+      "https://i.pinimg.com/736x/c9/49/14/c9491430ae30be3159f302144617989f.jpg",
   },
   {
     number: "03",
@@ -30,7 +30,7 @@ const STEPS = [
     description:
       "Each garment takes between 22 to 45 days on a handloom. The weavers work in measured rhythm — every weft, every pick deliberate — creating fabric that breathes like a second skin.",
     image:
-      "https://i.pinimg.com/1200x/20/6e/b5/206eb5f98ad2327d7c60012e87aedb79.jpg",
+      "https://i.pinimg.com/736x/1c/2e/90/1c2e90003087670283883773b093c2ce.jpg",
   },
   {
     number: "04",
@@ -39,7 +39,7 @@ const STEPS = [
     description:
       "Gold and silver metallic threads are woven into intricate zardozi patterns by artisans whose families have perfected this craft for over 400 years in the workshops of Lucknow.",
     image:
-      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=900&q=90",
+      "https://i.pinimg.com/736x/7a/4d/0c/7a4d0c6ae0e15ad24ad8b49e3fffef54.jpg",
   },
   {
     number: "05",
@@ -48,7 +48,7 @@ const STEPS = [
     description:
       "Every piece is steam-pressed, inspected under natural light, and wrapped in hand-dyed muslin before being placed in our signature heritage chest — ready to become part of your story.",
     image:
-      "https://i.pinimg.com/1200x/64/bd/1f/64bd1f6cf1aeb0cf2ffc3848bcef2f22.jpg",
+      "https://i.pinimg.com/736x/ff/d6/44/ffd644817cdc4d052d1e76333ac3e915.jpg",
   },
 ];
 
