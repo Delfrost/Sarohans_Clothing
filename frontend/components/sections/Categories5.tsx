@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const categories = [
   {
@@ -13,7 +14,7 @@ const categories = [
     id: 2,
     name: "Sherwanis",
     subtitle: "Royal Grandeur",
-    image: "https://i.pinimg.com/1200x/90/29/d8/9029d88b83c3bc133ba833f8930f1c8a.jpg",
+    image: "https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg",
   },
   {
     id: 3,
@@ -70,14 +71,14 @@ const RoyalFrame = ({ hovered }: { hovered: boolean }) => {
           <stop offset="100%" stopColor={goldDark} />
         </linearGradient>
         <filter id="gold-glow">
-          <feGaussianBlur stdDeviation={hovered ? "3" : "1.5"} result="coloredBlur"/>
+          <feGaussianBlur stdDeviation={hovered ? "3" : "1.5"} result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
         <filter id="drop-shadow">
-          <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#000" floodOpacity="0.8"/>
+          <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="#000" floodOpacity="0.8" />
         </filter>
       </defs>
 
@@ -95,17 +96,17 @@ const RoyalFrame = ({ hovered }: { hovered: boolean }) => {
         <path d="M 12 36 C 24 36 36 24 36 12" />
         <path d="M 24 36 C 24 30 30 24 36 24" />
         <circle cx="18" cy="18" r="2.5" fill="url(#royal-gold)" />
-        
+
         {/* Top Right */}
         <path d="M 288 36 C 276 36 264 24 264 12" />
         <path d="M 276 36 C 276 30 270 24 264 24" />
         <circle cx="282" cy="18" r="2.5" fill="url(#royal-gold)" />
-        
+
         {/* Bottom Left */}
         <path d="M 12 384 C 24 384 36 396 36 408" />
         <path d="M 24 384 C 24 390 30 396 36 396" />
         <circle cx="18" cy="402" r="2.5" fill="url(#royal-gold)" />
-        
+
         {/* Bottom Right */}
         <path d="M 288 384 C 276 384 264 396 264 408" />
         <path d="M 276 384 C 276 390 270 396 264 396" />
@@ -140,8 +141,8 @@ const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
         userSelect: "none",
         transition: "transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease",
         transform: hovered ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
-        boxShadow: hovered 
-          ? "0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.25)" 
+        boxShadow: hovered
+          ? "0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.25)"
           : "0 15px 35px rgba(0,0,0,0.9)",
         backgroundColor: "#1C0509", // Deep Velvet Base
         flexShrink: 0,
@@ -311,8 +312,14 @@ export default function RoyalCategoryShowcase() {
       }}>
 
         {/* ── Royal Header ── */}
-        <div style={{ textAlign: "center", marginBottom: "72px" }}>
-          
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ textAlign: "center", marginBottom: "72px" }}
+        >
+
           {/* Top Crown Accent */}
           <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
             <svg width="60" height="30" viewBox="0 0 60 30" fill="none">
@@ -349,7 +356,7 @@ export default function RoyalCategoryShowcase() {
             </p>
             <div style={{ height: "1px", width: "80px", background: `linear-gradient(to left, transparent, ${gold})` }} />
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Cards Grid ── */}
         <div style={{
@@ -358,14 +365,22 @@ export default function RoyalCategoryShowcase() {
           gap: "40px 32px",
           width: "100%",
         }}>
-          {categories.map((cat) => (
-            <CategoryCard key={cat.id} cat={cat} />
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CategoryCard cat={cat} />
+            </motion.div>
           ))}
         </div>
 
         {/* ── Ornate Footer ── */}
-        <div style={{ 
-          textAlign: "center", 
+        <div style={{
+          textAlign: "center",
           marginTop: "80px",
           display: "flex",
           flexDirection: "column",
