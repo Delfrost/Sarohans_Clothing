@@ -6,37 +6,37 @@ import { motion } from "framer-motion";
 const categories = [
   {
     id: 1,
-    name: "Bridal Collection",
+    name: "Rajputi Sarees",
     subtitle: "Eternal Elegance",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&q=85",
   },
   {
     id: 2,
-    name: "Sherwanis",
+    name: "Rajputi Poshak",
     subtitle: "Royal Grandeur",
     image: "https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg",
   },
   {
     id: 3,
-    name: "Sarees",
+    name: "Lehengas",
     subtitle: "Timeless Grace",
     image: "https://i.pinimg.com/736x/40/e6/1b/40e61bc7d56a9db626ec3f54fb38d768.jpg",
   },
   {
     id: 4,
-    name: "Indo-Western",
+    name: "Sarees and Blouses",
     subtitle: "Modern Royalty",
     image: "https://i.pinimg.com/736x/9d/b0/8c/9db08c98ce803168e08d80b33316fed7.jpg",
   },
   {
     id: 5,
-    name: "Festive Wear",
+    name: "Kurta",
     subtitle: "Celebrate in Style",
     image: "https://i.pinimg.com/1200x/ae/7b/3a/ae7b3aa67838af01ed6d25c3c90e2d4d.jpg",
   },
   {
     id: 6,
-    name: "Lehengas",
+    name: "Shirts",
     subtitle: "Draped in Luxury",
     image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=800&q=85",
   },
@@ -267,12 +267,14 @@ const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
 
 /* ─── Main Section ─── */
 export default function RoyalCategoryShowcase() {
-  const [cols, setCols] = useState(3);
+  const [colsWomens, setColsWomens] = useState(4);
+  const [colsMens, setColsMens] = useState(2);
 
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      setCols(w < 640 ? 1 : w < 1024 ? 2 : 3);
+      setColsWomens(w < 640 ? 1 : w < 1024 ? 2 : 4);
+      setColsMens(w < 640 ? 1 : 2);
     };
     update();
     window.addEventListener("resize", update);
@@ -317,7 +319,7 @@ export default function RoyalCategoryShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          style={{ textAlign: "center", marginBottom: "72px" }}
+          style={{ textAlign: "center", marginBottom: "64px" }}
         >
 
           {/* Top Crown Accent */}
@@ -358,14 +360,78 @@ export default function RoyalCategoryShowcase() {
           </div>
         </motion.div>
 
-        {/* ── Cards Grid ── */}
+        {/* ── Women's Section Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          style={{ textAlign: "center", marginBottom: "32px" }}
+        >
+          <h3 style={{
+            color: "#D4AF37",
+            fontSize: "1.1rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            fontFamily: "var(--font-label, 'Cinzel', serif)",
+            margin: 0
+          }}>
+            Women's Collection
+          </h3>
+          <div style={{ width: "40px", height: "1px", background: "linear-gradient(90deg, transparent, #D4AF37, transparent)", margin: "12px auto 0" }} />
+        </motion.div>
+
+        {/* ── Women's Cards Grid ── */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
+          gridTemplateColumns: `repeat(${colsWomens}, 1fr)`,
           gap: "40px 32px",
           width: "100%",
+          marginBottom: "64px",
         }}>
-          {categories.map((cat, i) => (
+          {categories.slice(0, 4).map((cat, i) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <CategoryCard cat={cat} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── Men's Section Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          style={{ textAlign: "center", marginBottom: "32px" }}
+        >
+          <h3 style={{
+            color: "#D4AF37",
+            fontSize: "1.1rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            fontFamily: "var(--font-label, 'Cinzel', serif)",
+            margin: 0
+          }}>
+            Men's Collection
+          </h3>
+          <div style={{ width: "40px", height: "1px", background: "linear-gradient(90deg, transparent, #D4AF37, transparent)", margin: "12px auto 0" }} />
+        </motion.div>
+
+        {/* ── Men's Cards Grid ── */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${colsMens}, 1fr)`,
+          gap: "40px 32px",
+          width: colsMens === 2 && colsWomens === 4 ? "calc(50% - 16px)" : "100%",
+          margin: "0 auto",
+        }}>
+          {categories.slice(4, 6).map((cat, i) => (
             <motion.div
               key={cat.id}
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
