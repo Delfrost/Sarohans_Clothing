@@ -2,17 +2,56 @@
 
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock } from "lucide-react";
 import "../auth.css";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // TODO: Add actual authentication logic here
-    console.log("Logging in with:", email);
+
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Login failed. Please try again.");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      router.push("/");
+    } catch {
+      setError("Unable to connect to server. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -48,8 +87,14 @@ export default function LoginPage() {
               />
             </div>
 
-            <button type="submit" className="auth-btn">
-              LOGIN
+            {error && (
+              <p style={{ color: "#ff6b6b", fontSize: "0.85rem", marginBottom: "1rem", fontFamily: "var(--font-body)" }}>
+                {error}
+              </p>
+            )}
+
+            <button type="submit" className="auth-btn" disabled={isSubmitting}>
+              {isSubmitting ? "LOGGING IN..." : "LOGIN"}
             </button>
           </form>
 
