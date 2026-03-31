@@ -2,25 +2,62 @@
 
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, User } from "lucide-react";
 import "../auth.css";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
+
+    setIsSubmitting(true);
     setError(null);
-    // TODO: Add actual signup logic here
-    console.log("Signing up with:", { name, email });
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Signup failed. Please try again.");
+        return;
+      }
+
+      router.push("/login");
+    } catch {
+      setError("Unable to connect to server. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -86,8 +123,8 @@ export default function SignupPage() {
               </p>
             )}
 
-            <button type="submit" className="auth-btn">
-              SIGN UP
+            <button type="submit" className="auth-btn" disabled={isSubmitting}>
+              {isSubmitting ? "SIGNING UP..." : "SIGN UP"}
             </button>
           </form>
 
