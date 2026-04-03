@@ -1,65 +1,138 @@
-import Image from "next/image";
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import HeroSection from "../components/sections/LandingPage2";
+import { HeritageStrip } from "../components/sections/LandingPage";
+import Categories from "../components/sections/Categories5";
+import CustomerReviews from "../components/sections/CustomerReviews";
+import SaroHansShowcase from "../components/sections/Categories6";
+import CraftsmanshipJourney from "../components/sections/CraftsmanshipJourney";
+import GoldParticles from "../components/ui/GoldParticles";
+
+// ─── Cinematic section divider ────────────────────────────────────────────────
+function SectionTransition({ variant = "default" }: { variant?: "default" | "grand" }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2 }}
+      style={{
+        position: "relative",
+        height: variant === "grand" ? 120 : 80,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        background: "#0A0800",
+      }}
+    >
+      {/* Gold line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          width: variant === "grand" ? 300 : 180,
+          height: 1,
+          background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)",
+          transformOrigin: "center",
+        }}
+      />
+
+      {/* Center diamond */}
+      {variant === "grand" && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0, rotate: 0 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 45 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          style={{
+            position: "absolute",
+            width: 8,
+            height: 8,
+            background: "#C9A84C",
+            opacity: 0.6,
+          }}
+        />
+      )}
+    </motion.div>
+  );
+}
+
+// ─── Parallax section wrapper ─────────────────────────────────────────────────
+function ParallaxSection({
+  children,
+  speed = 0.1,
+}: {
+  children: React.ReactNode;
+  speed?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [speed * 100, -speed * 100]);
+
+  return (
+    <div ref={ref} style={{ position: "relative", overflow: "hidden" }}>
+      <motion.div style={{ y }}>
+        {children}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main style={{ background: "#0A0800", minHeight: "100vh", position: "relative" }}>
+      {/* Global floating gold particles */}
+      <GoldParticles />
+
+      {/* 1. Cinematic hero with parallax */}
+      <HeroSection />
+
+      {/* ── Transition ── */}
+      <SectionTransition variant="grand" />
+
+      {/* 1.5 Saro & Hans — Collection Showcase */}
+      <SaroHansShowcase />
+
+      {/* ── Transition ── */}
+      <SectionTransition variant="grand" />
+
+      {/* 2. Category cards — Royal Treasury */}
+      <Categories />
+
+      {/* ── Transition ── */}
+      <SectionTransition />
+
+      {/* 3. Craftsmanship horizontal scroll journey */}
+      <CraftsmanshipJourney />
+
+      {/* ── Transition ── */}
+      <SectionTransition variant="grand" />
+
+      {/* 4. Heritage stats strip with animated counters */}
+      <ParallaxSection speed={0.05}>
+        <HeritageStrip />
+      </ParallaxSection>
+
+      {/* ── Transition ── */}
+      <SectionTransition />
+
+      {/* 5. Customer reviews */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 1 }}
+      >
+        <CustomerReviews />
+      </motion.div>
+    </main>
   );
 }

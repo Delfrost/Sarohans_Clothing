@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+/* ── CRITICAL: prevent Tailwind base from adding white bg to images ── */
+img {
+  background: transparent !important;
+}
+
 body {
   background-color: var(--black-deep);
   color: var(--gold-light);
@@ -52,4 +57,52 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 4s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Floating Glowing Orbs (Landing Page) ── */
+@keyframes orb-float {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  33% { transform: translate(3vw, -5vh) scale(1.1); opacity: 0.5; }
+  66% { transform: translate(-2vw, 3vh) scale(0.9); opacity: 0.35; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+}
+
+.luxury-orb-1 {
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  filter: blur(40px);
+  top: -10%;
+  left: -15%;
+  animation: orb-float 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.luxury-orb-2 {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+  filter: blur(60px);
+  bottom: -20%;
+  right: -10%;
+  animation: orb-float 22s ease-in-out infinite reverse;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Floating Dust Motes (Craftsmanship) ── */
+@keyframes float-mote {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
 }
