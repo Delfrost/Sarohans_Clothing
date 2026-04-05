@@ -1,6 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+<<<<<<< Updated upstream
+=======
+import { motion } from "framer-motion";
+import Link from "next/link";
+>>>>>>> Stashed changes
 
 const categories = [
   {
@@ -8,36 +13,46 @@ const categories = [
     name: "Bridal Collection",
     subtitle: "Eternal Elegance",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&q=85",
+    href: "/saro?category=rajputi-saree",
   },
   {
     id: 2,
     name: "Sherwanis",
     subtitle: "Royal Grandeur",
+<<<<<<< Updated upstream
     image: "https://i.pinimg.com/736x/c5/ff/82/c5ff829d38dc7fc9fb760ed3da6285fa.jpg",
+=======
+    image: "https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg",
+    href: "/saro?category=poshak",
+>>>>>>> Stashed changes
   },
   {
     id: 3,
     name: "Sarees",
     subtitle: "Timeless Grace",
     image: "https://i.pinimg.com/736x/40/e6/1b/40e61bc7d56a9db626ec3f54fb38d768.jpg",
+    href: "/saro?category=lehengas",
   },
   {
     id: 4,
     name: "Indo-Western",
     subtitle: "Modern Royalty",
     image: "https://i.pinimg.com/736x/9d/b0/8c/9db08c98ce803168e08d80b33316fed7.jpg",
+    href: "/saro?category=saree",
   },
   {
     id: 5,
     name: "Festive Wear",
     subtitle: "Celebrate in Style",
     image: "https://i.pinimg.com/1200x/ae/7b/3a/ae7b3aa67838af01ed6d25c3c90e2d4d.jpg",
+    href: "/hans?category=kurta",
   },
   {
     id: 6,
     name: "Lehengas",
     subtitle: "Draped in Luxury",
     image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=800&q=85",
+    href: "/hans?category=shirts",
   },
 ];
 
@@ -129,6 +144,7 @@ const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
+    <Link href={cat.href || "#"} style={{ textDecoration: "none" }}>
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -261,6 +277,7 @@ const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
