@@ -1,57 +1,53 @@
 "use client";
 
 import { useState, useEffect } from "react";
-<<<<<<< Updated upstream
-=======
 import { motion } from "framer-motion";
 import Link from "next/link";
->>>>>>> Stashed changes
 
-const categories = [
+const womensCategories = [
   {
     id: 1,
-    name: "Bridal Collection",
-    subtitle: "Eternal Elegance",
+    name: "Rajputi Saree",
+    subtitle: "Royal Heritage",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&q=85",
     href: "/saro?category=rajputi-saree",
   },
   {
     id: 2,
-    name: "Sherwanis",
-    subtitle: "Royal Grandeur",
-<<<<<<< Updated upstream
-    image: "https://i.pinimg.com/736x/c5/ff/82/c5ff829d38dc7fc9fb760ed3da6285fa.jpg",
-=======
-    image: "https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg",
+    name: "Poshak",
+    subtitle: "Traditional Grace",
+    image: "https://i.pinimg.com/736x/9d/b0/8c/9db08c98ce803168e08d80b33316fed7.jpg",
     href: "/saro?category=poshak",
->>>>>>> Stashed changes
   },
   {
     id: 3,
-    name: "Sarees",
-    subtitle: "Timeless Grace",
-    image: "https://i.pinimg.com/736x/40/e6/1b/40e61bc7d56a9db626ec3f54fb38d768.jpg",
+    name: "Lehengas",
+    subtitle: "Draped in Luxury",
+    image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=800&q=85",
     href: "/saro?category=lehengas",
   },
   {
     id: 4,
-    name: "Indo-Western",
-    subtitle: "Modern Royalty",
-    image: "https://i.pinimg.com/736x/9d/b0/8c/9db08c98ce803168e08d80b33316fed7.jpg",
+    name: "Saree",
+    subtitle: "Timeless Elegance",
+    image: "https://i.pinimg.com/736x/40/e6/1b/40e61bc7d56a9db626ec3f54fb38d768.jpg",
     href: "/saro?category=saree",
   },
+];
+
+const mensCategories = [
   {
     id: 5,
-    name: "Festive Wear",
-    subtitle: "Celebrate in Style",
-    image: "https://i.pinimg.com/1200x/ae/7b/3a/ae7b3aa67838af01ed6d25c3c90e2d4d.jpg",
+    name: "Kurta",
+    subtitle: "Classic Comfort",
+    image: "https://i.pinimg.com/1200x/59/af/32/59af328e444197968994c7b240b5b389.jpg",
     href: "/hans?category=kurta",
   },
   {
     id: 6,
-    name: "Lehengas",
-    subtitle: "Draped in Luxury",
-    image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=800&q=85",
+    name: "Shirts",
+    subtitle: "Modern Royalty",
+    image: "https://images.unsplash.com/photo-1604514628550-37477afdf4e3?w=800&q=85",
     href: "/hans?category=shirts",
   },
 ];
@@ -140,7 +136,7 @@ const RoyalFrame = ({ hovered }: { hovered: boolean }) => {
 };
 
 /* ─── Category Card (Velvet & Gold) ─── */
-const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
+const CategoryCard = ({ cat }: { cat: typeof womensCategories[0] }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -283,12 +279,14 @@ const CategoryCard = ({ cat }: { cat: typeof categories[0] }) => {
 
 /* ─── Main Section ─── */
 export default function RoyalCategoryShowcase() {
-  const [cols, setCols] = useState(3);
+  const [womensCols, setWomensCols] = useState(4);
+  const [mensCols, setMensCols] = useState(2);
 
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      setCols(w < 640 ? 1 : w < 1024 ? 2 : 3);
+      setWomensCols(w < 640 ? 1 : w < 1024 ? 2 : 4);
+      setMensCols(w < 640 ? 1 : 2);
     };
     update();
     window.addEventListener("resize", update);
@@ -369,15 +367,70 @@ export default function RoyalCategoryShowcase() {
         </div>
 
         {/* ── Cards Grid ── */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gap: "40px 32px",
-          width: "100%",
-        }}>
-          {categories.map((cat) => (
-            <CategoryCard key={cat.id} cat={cat} />
-          ))}
+        <div style={{ marginBottom: "64px" }}>
+          <h3 style={{
+            color: gold,
+            fontSize: "clamp(1.5rem, 3vw, 2rem)",
+            fontWeight: 400,
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            textAlign: "center",
+            marginBottom: "40px",
+            borderBottom: `1px solid ${gold}40`,
+            paddingBottom: "16px",
+            width: "fit-content",
+            margin: "0 auto 40px auto",
+            fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)"
+          }}>
+            <span style={{ color: "#FFF5E1" }}>Saro</span> &nbsp;·&nbsp; Women's Collection
+          </h3>
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${womensCols}, 1fr)`,
+            gap: "40px 32px",
+            width: "100%",
+          }}>
+            {womensCategories.map((cat) => (
+              <CategoryCard key={cat.id} cat={cat} />
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", margin: "80px 0" }}>
+           <div style={{ height: "1px", width: "160px", background: `linear-gradient(to right, transparent, ${gold}, transparent)` }} />
+        </div>
+
+        <div style={{ marginBottom: "24px" }}>
+          <h3 style={{
+            color: gold,
+            fontSize: "clamp(1.5rem, 3vw, 2rem)",
+            fontWeight: 400,
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            textAlign: "center",
+            marginBottom: "40px",
+            borderBottom: `1px solid ${gold}40`,
+            paddingBottom: "16px",
+            width: "fit-content",
+            margin: "0 auto 40px auto",
+            fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)"
+          }}>
+            <span style={{ color: "#FFF5E1" }}>Hans</span> &nbsp;·&nbsp; Men's Collection
+          </h3>
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${mensCols}, 1fr)`,
+            gap: "40px 32px",
+            width: "100%",
+            maxWidth: "800px", // Optional: restrict width so 2 cards don't look overly huge
+            margin: "0 auto",
+          }}>
+            {mensCategories.map((cat) => (
+              <CategoryCard key={cat.id} cat={cat} />
+            ))}
+          </div>
         </div>
 
         {/* ── Ornate Footer ── */}

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const API_BASE = "http://localhost:5000/api";
 
@@ -54,10 +55,13 @@ const SORT_OPTIONS = [
   { label: "A → Z", value: "name_asc" },
 ];
 
-export default function HansShop() {
+function HansShopContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category") || "";
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [activeFilter, setActiveFilter] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [showFilters, setShowFilters] = useState(false);
@@ -590,5 +594,13 @@ export default function HansShop() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function HansShop() {
+  return (
+    <Suspense fallback={<div style={{ background: "#0A0800", minHeight: "100vh", paddingTop: "100px", textAlign: "center", color: "#C9A84C", fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem" }}>Loading...</div>}>
+      <HansShopContent />
+    </Suspense>
   );
 }

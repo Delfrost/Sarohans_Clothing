@@ -1,0 +1,27 @@
+0ee771b HEAD@{2026-04-05 23:07:12 +0530}: commit: resolved conflicts and removed invalid file
+d5cb32b HEAD@{2026-04-05 22:59:39 +0530}: checkout: moving from categories to categories
+d5cb32b HEAD@{2026-04-05 22:58:08 +0530}: checkout: moving from database to categories
+ff14f5b HEAD@{2026-04-05 22:57:57 +0530}: reset: moving to HEAD
+ff14f5b HEAD@{2026-04-03 14:59:27 +0530}: commit: All the 10 tables added
+5175644 HEAD@{2026-04-03 14:57:39 +0530}: checkout: moving from Development to database
+5175644 HEAD@{2026-04-01 22:45:03 +0530}: pull origin Development: Fast-forward
+4062783 HEAD@{2026-04-01 22:44:47 +0530}: checkout: moving from Mens_Womens_Split to Development
+aace26d HEAD@{2026-03-23 22:06:48 +0530}: commit: Some changes made
+7eadc31 HEAD@{2026-03-16 17:31:21 +0530}: commit: Photos updated
+9aa3cb7 HEAD@{2026-03-16 17:22:22 +0530}: commit: Mens and womens split added
+3218434 HEAD@{2026-03-16 17:21:59 +0530}: checkout: moving from feature/Scroll_Animation to Mens_Womens_Split
+3218434 HEAD@{2026-03-16 00:14:36 +0530}: checkout: moving from categories to feature/Scroll_Animation
+d5cb32b HEAD@{2026-03-16 00:14:26 +0530}: commit: Some sections updated
+4cc3c79 HEAD@{2026-03-12 22:06:06 +0530}: commit: Categories section added
+377e64f HEAD@{2026-03-12 01:17:17 +0530}: checkout: moving from footer to categories
+377e64f HEAD@{2026-03-11 01:47:22 +0530}: commit: Footer added
+4062783 HEAD@{2026-03-10 15:21:16 +0530}: pull origin Development: Fast-forward
+1c55a2a HEAD@{2026-03-10 15:20:51 +0530}: checkout: moving from Development to footer
+4062783 HEAD@{2026-03-10 11:28:54 +0530}: pull origin Development: Fast-forward
+1c55a2a HEAD@{2026-03-10 11:28:29 +0530}: checkout: moving from development to Development
+1c55a2a HEAD@{2026-03-10 11:27:56 +0530}: checkout: moving from footer to development
+1c55a2a HEAD@{2026-03-10 11:14:05 +0530}: checkout: moving from review-section to footer
+1c55a2a HEAD@{2026-03-10 11:10:36 +0530}: pull origin Development: Fast-forward
+233f05a HEAD@{2026-03-08 20:52:25 +0530}: commit: feat: added premium customer reviews section with royal aesthetics
+9f9d06c HEAD@{2026-03-08 19:43:29 +0530}: checkout: moving from Production to review-section
+9f9d06c HEAD@{2026-03-08 19:37:45 +0530}: clone: from https://github.com/Delfrost/Sarohans_Clothing
